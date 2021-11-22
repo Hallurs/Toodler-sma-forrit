@@ -8,7 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "lint": "node ./node_modules/eslint/bin/eslint.js **/*.jsx"
+    "lint": "node ./node_modules/eslint/bin/eslint.js **/*.jsx --fix"
   },
   "dependencies": {
     "expo": "~43.0.2",

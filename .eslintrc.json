@@ -23,7 +23,8 @@
         {
           "namedComponents": "function-declaration"
         }
-      ]
+      ],
+      "react/style-prop-object": [0]
     }
 
 }

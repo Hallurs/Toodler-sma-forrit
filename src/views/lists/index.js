@@ -2,14 +2,14 @@ import React from "react";
 import { View, Text, TouchableHighlight, Image } from 'react-native';
 import styles from './styles';
 
-const Boards = ({navigation: { navigate } }) => (
+const lists = ({navigation: { navigate } }) => (
     <View style={styles.container}>
-        <TouchableHighlight 
-            onPress={() => navigate('Lists')}
+        <TouchableHighlight
+            onPress={() => navigate('Tasks')} 
             style={styles.button}>
-            <Text style={styles.buttonText}>On boards now</Text>
+            <Text style={styles.buttonText}>On lists now</Text>
         </TouchableHighlight>
     </View>
 );
 
-export default Boards;
+export default lists;

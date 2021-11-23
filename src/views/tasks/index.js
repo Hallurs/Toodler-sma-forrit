@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableHighlight, Image } from 'react-native';
 import styles from './styles';
 
-const tasks = ({navigation: { navigate } }) => (
+const Tasks = ({navigation: { navigate } }) => (
     <View style={styles.container}>
         <TouchableHighlight
             onPress={() => navigate('Task')} 
@@ -12,4 +12,4 @@ const tasks = ({navigation: { navigate } }) => (
     </View>
 );
 
-export default tasks;
+export default Tasks;

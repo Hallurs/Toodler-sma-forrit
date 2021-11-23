@@ -5,20 +5,20 @@ import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 /* Import view components */
-import Main from '../views/main';
+import Main from '../views/Main';
 import Boards from '../views/Boards';
-import lists from '../views/lists';
-import tasks from '../views/tasks';
-import task from '../views/task';
+import Lists from '../views/Lists';
+import Tasks from '../views/Tasks';
+import Task from '../views/Task';
 
 const Routes = () => (
     <NavigationContainer>
         <Stack.Navigator initialRouteName="Main">
             <Stack.Screen name="Main" component={Main} />
             <Stack.Screen name="Boards" component={Boards} />
-            <Stack.Screen name="Lists" component={lists} />
-            <Stack.Screen name="Tasks" component={tasks} />
-            <Stack.Screen name="Task" component={task} />
+            <Stack.Screen name="Lists" component={Lists} />
+            <Stack.Screen name="Tasks" component={Tasks} />
+            <Stack.Screen name="Task" component={Task} />
         </Stack.Navigator>
     </NavigationContainer>
 );

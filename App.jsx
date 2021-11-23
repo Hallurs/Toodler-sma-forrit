@@ -1,17 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Main from './src/views/main';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+import AppContainer from './src/routes';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Main />
-    </View>
+    <AppContainer />
   );
 }

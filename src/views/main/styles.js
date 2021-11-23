@@ -18,5 +18,8 @@ export default StyleSheet.create({
         borderColor: 'white',
         borderWidth: 2,
         backgroundColor: coolcolor
+    },
+    buttonText: {
+        color: 'white'
     }
 });

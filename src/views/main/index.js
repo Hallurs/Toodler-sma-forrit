@@ -4,8 +4,8 @@ import styles from './styles';
 
 const Main = () => (
     <View style={styles.container}>
-        <TouchableHighlight>
-            <Text>Boards</Text>
+        <TouchableHighlight style={styles.button}>
+            <Text style={styles.buttonText}>Boards</Text>
         </TouchableHighlight>
     </View>
 );

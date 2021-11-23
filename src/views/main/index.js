@@ -3,12 +3,10 @@ import { View, Text, TouchableHighlight, Image } from 'react-native';
 import styles from './styles';
 
 const Main = () => (
-    <View>
-        <h1> Welcome to toodler! </h1>
+    <View style={styles.container}>
         <TouchableHighlight>
             <Text>Boards</Text>
         </TouchableHighlight>
-
     </View>
 );
 

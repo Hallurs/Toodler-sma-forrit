@@ -5,11 +5,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 /* Import view components */
-import Main from '../views/main';
+import Main from '../views/Main';
 import Boards from '../views/Boards';
 import Lists from '../views/lists';
-import Tasks from '../views/tasks';
-import Task from '../views/task';
+import Tasks from '../views/Tasks';
+import Task from '../views/Task';
 
 const Routes = () => (
     <NavigationContainer>

@@ -6,7 +6,6 @@ import data from "../../resources/data.json";
 
 const Boards = ({navigation: { navigate } }) => (
     <View style={styles.container}>
-        {console.log(data.boards)}
         <BoardList images={data.boards}/>
         {/* <TouchableHighlight 
             onPress={() => navigate('Lists')}

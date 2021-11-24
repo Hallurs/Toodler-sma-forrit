@@ -8,10 +8,9 @@ const BoardList = ({ images }) => (
         <FlatList
             // numColumns={3}
             data={images}
-            renderItem={({ item: { thumbnailPhoto } }) => {
-                console.log(thumbnailPhoto)
+            renderItem={({ item: { thumbnailPhoto, name } }) => {
                 return (
-                    <ImageThumbnail file={thumbnailPhoto} />
+                    <ImageThumbnail name={name} file={thumbnailPhoto} />
                 );
             }}
             keyExtractor={image => image.name} />

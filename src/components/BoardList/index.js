@@ -6,7 +6,7 @@ import styles from './styles';
 const BoardList = ({ images }) => (
     <View style={styles.listContainer}>
         <FlatList
-            numColumns={3}
+            // numColumns={3}
             data={images}
             renderItem={({ item: { thumbnailPhoto } }) => {
                 console.log(thumbnailPhoto)

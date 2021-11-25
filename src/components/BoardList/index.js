@@ -9,14 +9,14 @@ const BoardList = ({ images, selectedImages, onLongPress }) => (
         <FlatList
             data={images}
             extraData={selectedImages}
-            renderItem={({ item: { thumbnailPhoto, name, id } }) => {
+            renderItem={({ item }) => {
                 return (
                     <ImageThumbnail
-                        isSelected={selectedImages.indexOf(name) !== -1}
+                        isSelected={selectedImages.indexOf(item.name) !== -1}
                         onLongPress={onLongPress}
-                        id={id}
-                        name={name} 
-                        file={thumbnailPhoto} />
+                        id={item.id}
+                        name={item.name}
+                        file={item.thumbnailPhoto} />
                 );
             }}
             keyExtractor={image => image.name} />

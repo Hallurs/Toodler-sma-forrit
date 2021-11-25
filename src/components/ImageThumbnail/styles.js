@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     image: {
-        width: 115,
-        height: 115,
+        width: 300,
+        height: 200,
         margin: 10
     },
     checkmark: {

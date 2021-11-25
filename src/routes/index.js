@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 import Main from '../views/Main';
 import Boards from '../views/Boards';
 import Board from '../views/Board';
-import Lists from '../views/lists';
+import Lists from '../views/Lists';
 import Tasks from '../views/Tasks';
 import Task from '../views/Task';
 

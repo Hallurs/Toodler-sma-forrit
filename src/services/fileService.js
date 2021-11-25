@@ -1,6 +1,5 @@
 import * as FileSystem from 'expo-file-system';
-//const imageDirectory =  `${FileSystem.documentDirectory}images`;
-//console.log(imageDirectory)
+const imageDirectory = `${FileSystem.documentDirectory}images`;
 import data from '../resources/data.json'
 
 const onException = (cb, errorHandler) => {
@@ -27,50 +26,45 @@ export const copyFile = async (file, newLocation) => {
 
 export const addImage = async imageLocation => {
     const folderSplit = imageLocation.split('/');
-    const thumbnailPhoto = folderSplit[folderSplit.length - 1];
-   // await onException(() => copyFile(imageLocation, `${imageDirectory}/${thumbnailPhoto}`));
+    const fileName = folderSplit[folderSplit.length - 1];
+    await onException(() => copyFile(imageLocation, `${imageDirectory}/${fileName}`));
 
     return {
-        name: thumbnailPhoto,
+        name: fileName,
         type: 'image',
-        file: await loadImage(thumbnailPhoto)
+        file: await loadImage(fileName)
     };
 }
 
 export const remove = name => {
-    console.log(name)
-    //return await onException(() => FileSystem.deleteAsync(`${imageDirectory}/${name}`, { idempotent: true }));
-    //return onException(() => data.boards, { idempotent: true });
     data.boards.map((elem,index,arr) => {
         if(elem.name === name) {arr.splice(index,1)}
     });
 }
 
 export const loadImage = async fileName => {
-    //return await onException(() => FileSystem.readAsStringAsync(`${imageDirectory}/${fileName}`, {
-       // encoding: FileSystem.EncodingType.Base64
-    //}));
+    return await onException(() => FileSystem.readAsStringAsync(`${imageDirectory}/${fileName}`, {
+        encoding: FileSystem.EncodingType.Base64
+    }));
 }
 
 const setupDirectory = async () => {
-   // const dir = await FileSystem.getInfoAsync(imageDirectory);
-    //if (!dir.exists) {
-        //await FileSystem.makeDirectoryAsync(imageDirectory);
-    //}
+    const dir = await FileSystem.getInfoAsync(imageDirectory);
+    if (!dir.exists) {
+        await FileSystem.makeDirectoryAsync(imageDirectory);
+    }
 }
 
 export const getAllImages = async () => {
     // Check if directory exists
-   // await setupDirectory();
+    await setupDirectory();
 
-    //const result = await onException(() => FileSystem.readDirectoryAsync(imageDirectory));
-    const result = data.boards;
-    console.log(result)
-    return result.map(async thumbnailPhoto => {
+    const result = await onException(() => FileSystem.readDirectoryAsync(imageDirectory));
+    return Promise.all(result.map(async fileName => {
         return {
-            name: thumbnailPhoto,
+            name: fileName,
             type: 'image',
-            file: await loadImage(thumbnailPhoto)
+            file: await loadImage(fileName)
         };
-    });
+    }));
 }

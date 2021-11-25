@@ -4,7 +4,7 @@ import { View, FlatList } from 'react-native';
 import ImageThumbnail from '../ImageThumbnail';
 import styles from './styles';
 
-const BoardList = ({ images, selectedImages, onLongPress }) => (
+const ListsOfBoards = ({ images, selectedImages, onLongPress }) => (
     <View style={styles.listContainer}>
         <FlatList
             data={images}
@@ -23,4 +23,4 @@ const BoardList = ({ images, selectedImages, onLongPress }) => (
     </View>
 );
 
-export default BoardList;
+export default ListsOfBoards;

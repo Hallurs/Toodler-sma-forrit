@@ -9,7 +9,7 @@ const ImageThumbnail = ({ file, name, isSelected, onLongPress, id}) => {
     return (
         <TouchableOpacity
             onLongPress={() => onLongPress(name)}
-            onPress={() => navigate('Board', { id })} >
+            onPress={() => navigate('Board', { boardId: id })} >
 
             {
                 isSelected

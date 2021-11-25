@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableHighlight, Image, TextInput } from 'react-native';
 import styles from './styles';
-import BoardList from "../../components/BoardList";
+import ListsOfBoards from '../../components/ListsOfBoards';
 import data from "../../resources/data.json";
 import Toolbar from '../../components/Toolbar';
 import * as fileService from '../../services/fileService';
@@ -109,7 +109,7 @@ const Boards = ({navigation: { navigate } }) => {
                     onRemove={() => deleteSelectedImages()} 
                     onEdit={() => editSelectedBoard()}/>
             
-            <BoardList 
+            <ListsOfBoards 
                 images={images}
                 selectedImages={selectedImages}
                 onLongPress={name => onImageLongPress(name)}/>

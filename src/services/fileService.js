@@ -1,5 +1,6 @@
 import * as FileSystem from 'expo-file-system';
 const imageDirectory = `${FileSystem.documentDirectory}images`;
+import data from '../resources/data.json'
 
 const onException = (cb, errorHandler) => {
     try {
@@ -13,7 +14,7 @@ const onException = (cb, errorHandler) => {
 }
 
 export const cleanDirectory = async () => {
-    await FileSystem.deleteAsync(imageDirectory);
+    //await FileSystem.deleteAsync(imageDirectory);
 }
 
 export const copyFile = async (file, newLocation) => {
@@ -35,8 +36,10 @@ export const addImage = async imageLocation => {
     };
 }
 
-export const remove = async name => {
-    return await onException(() => FileSystem.deleteAsync(`${imageDirectory}/${name}`, { idempotent: true }));
+export const remove = name => {
+    data.boards.map((elem,index,arr) => {
+        if(elem.name === name) {arr.splice(index,1)}
+    });
 }
 
 export const loadImage = async fileName => {

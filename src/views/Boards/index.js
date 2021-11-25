@@ -96,7 +96,8 @@ const Boards = ({navigation: { navigate } }) => {
         {
             imagefound.name = newBoardName; 
         }
-        setTempImage()
+        setTempImage();
+        setSelectedImages([]);
         setIsEditModalOpen(false);
     }
 

@@ -9,7 +9,6 @@ const BoardList = ({ images, selectedImages, onLongPress }) => (
             data={images}
             extraData={selectedImages}
             renderItem={({ item }) => {
-                //{console.log(Object.keys(item))}
                 return (
                     <ImageThumbnail
                         isSelected={selectedImages.indexOf(item.name) !== -1}

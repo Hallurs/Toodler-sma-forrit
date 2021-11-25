@@ -14,11 +14,10 @@ const EditModal = ({
 }) => {
 
     const [inputs, setInputs] = useState({
-        newBoardName: ''
+        newBoardName: nameOfBoard
     });
 
     const inputHandler = (name, value) => {
-        console.log(value)
         setInputs({
             ...inputs,
             [name]: value
@@ -33,7 +32,7 @@ const EditModal = ({
             <TextInput 
                 placeholder="Enter new board name"
                 value={inputs.newBoardName}
-                onChangeText={text => inputHandler('newBoardName', text)}/>
+                onChangeText={text => inputHandler('newBoardName', text)} />
             <Text>Change the photo</Text>
             <View style={styles.iconscontainer}> 
                 <TouchableOpacity
@@ -45,7 +44,11 @@ const EditModal = ({
                     <Entypo style={styles.icon} name="image" />
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={() => confirmChanges(inputs.newBoardName)}>
+                    onPress={() => {
+                        // Change and then empty out the input
+                        confirmChanges(inputs.newBoardName);
+                        inputHandler('newBoardName', '');
+                    }}>
                     <Entypo style={styles.icon} name="check" />
                 </TouchableOpacity>
             </View>

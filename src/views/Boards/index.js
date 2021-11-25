@@ -8,6 +8,7 @@ import * as fileService from '../../services/fileService';
 import * as imageService from '../../services/imageService';
 
 import EditModal from '../../components/EditModal';
+import AddModal from '../../components/AddModal';
 
 const Boards = ({navigation: { navigate } }) => {
     
@@ -82,12 +83,13 @@ const Boards = ({navigation: { navigate } }) => {
 
         const newImage = await fileService.addImage(image);
         setTempImage(`data:image/jpeg;base64,${newImage.file}`)
-        //setImages([...images, newImage]);
+        setImages([...images, newImage]);
         setLoadingImages(false);
     };
 
     const overWriteData = (name ,newBoardName) => {
         const imagefound = images.find(image => image.name === name[0]);
+        console.log(imagefound);
         if (tempImage !== undefined)
         {
             imagefound.thumbnailPhoto = tempImage;
@@ -99,6 +101,18 @@ const Boards = ({navigation: { navigate } }) => {
         setTempImage();
         setSelectedImages([]);
         setIsEditModalOpen(false);
+    }
+
+    const addWriteData = (newBoardName) => {
+        console.log(newBoardName);
+        const newImage = {
+            name: newBoardName,
+            thumbnailPhoto: tempImage
+        };
+        images.push(newImage);
+        setTempImage();
+        setSelectedImages([]);
+        setIsAddModalOpen(false);
     }
 
     return(
@@ -120,6 +134,13 @@ const Boards = ({navigation: { navigate } }) => {
                 takePhoto={() => takePhoto()}
                 confirmChanges={(newboardname) => overWriteData(selectedImages, newboardname)}
                 selectFromCameraRoll={() => selectFromCameraRoll()} 
+                />
+            <AddModal                 
+                isOpen={isAddModalOpen}
+                closeModal={() => setIsAddModalOpen(false)}
+                takePhoto={() => takePhoto()}
+                confirmChanges={(newboardname) => addWriteData(newboardname)}
+                selectFromCameraRoll={() => selectFromCameraRoll()}
                 />
             
             {/* <TouchableHighlight 

@@ -15,8 +15,7 @@ const BoardLists = ({lists}) => {
                         color={item.color} 
                         id={item.id} />
                 );
-            }}
-            keyExtractor={image => image.name} />
+            }}/>
         </View>
     )
 }

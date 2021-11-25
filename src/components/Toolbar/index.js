@@ -2,7 +2,7 @@ import React from 'react';
 import { View, TouchableHighlight, Text } from 'react-native';
 import styles from './styles';
 
-const Toolbar = ({ hasSelectedImages, onAdd, onRemove }) => (
+const Toolbar = ({ hasSelectedImages, onAdd, onRemove, onEdit }) => (
     <View styleName="horizontal" style={styles.toolbar}>
         <TouchableHighlight
             style={styles.toolbarAction}
@@ -14,6 +14,12 @@ const Toolbar = ({ hasSelectedImages, onAdd, onRemove }) => (
             onPress={onRemove}
             disabled={!hasSelectedImages}>
             <Text style={[styles.toolbarActionText, !hasSelectedImages ? { color: 'rgba(155, 155, 155, .5)' } : {}]}>Delete</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+            style={styles.toolbarAction}
+            onPress={onEdit}
+            disabled={!hasSelectedImages}>
+            <Text style={[styles.toolbarActionText, !hasSelectedImages ? { color: 'rgba(155, 155, 155, .5)' } : {}]}>Edit</Text>
         </TouchableHighlight>
     </View>
 );

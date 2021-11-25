@@ -27,7 +27,7 @@ const Board = ({route}) => {
         })();
     }, []);
 
-    {console.log("final board lists list",boardLists)}
+    /* {console.log("final board lists list",boardLists)} */
     return(
         <View style={styles.container}>
             <Toolbar

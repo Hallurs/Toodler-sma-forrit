@@ -1,9 +1,19 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
+import SingleTaskComponent from '../SingleTaskComponent';
 
-const ListsOfTasks = () => (
+const ListsOfTasks = ({lists}) => (
     <View>
-        
+        <FlatList
+            data = {lists}
+            renderItem={({ item }) => {
+                return (
+                    <SingleTaskComponent
+                        name={item.name}
+                        description={item.description} />
+                );
+            }}
+            keyExtractor={image => image.name} />
     </View>
 )
 

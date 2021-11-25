@@ -12,7 +12,8 @@ const BoardLists = ({lists}) => {
                 return (
                     <SingleListComponent
                         name={item.name}
-                        color={item.color} />
+                        color={item.color} 
+                        id={item.id} />
                 );
             }}
             keyExtractor={image => image.name} />

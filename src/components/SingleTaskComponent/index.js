@@ -8,7 +8,7 @@ const SingleTaskComponent = ({name, isSelected, onLongPress, id}) => {
     return (
         <TouchableOpacity
             onLongPress={() => onLongPress(name)}
-            onPress={() => navigate('Tasks', { listId: id })} >
+            onPress={() => navigate('Task', { listId: id })} >
             <View style={{ opacity: isSelected ? .5 : 1 }} >
                 <Text>{name}</Text>
             </View>

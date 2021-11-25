@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableHighlight, Image } from 'react-native';
 import styles from './styles';
+import data from "../../resources/data.json";
+import Toolbar from '../../components/Toolbar';
 
-const Task = ({navigation: { navigate } }) => (
+const Task = ({route}) => (
     <View style={styles.container}>
-        <TouchableHighlight 
-            style={styles.button}>
-            <Text style={styles.buttonText}>On task now</Text>
-        </TouchableHighlight>
+        
     </View>
 );
 

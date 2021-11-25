@@ -1,3 +1,4 @@
+import { NavigationHelpersContext } from '@react-navigation/native';
 import React from 'react';
 import { View, FlatList } from 'react-native';
 import ImageThumbnail from '../ImageThumbnail';
@@ -8,11 +9,12 @@ const BoardList = ({ images, selectedImages, onLongPress }) => (
         <FlatList
             data={images}
             extraData={selectedImages}
-            renderItem={({ item: { thumbnailPhoto, name } }) => {
+            renderItem={({ item: { thumbnailPhoto, name, id } }) => {
                 return (
                     <ImageThumbnail
                         isSelected={selectedImages.indexOf(name) !== -1}
                         onLongPress={onLongPress}
+                        id={id}
                         name={name} 
                         file={thumbnailPhoto} />
                 );

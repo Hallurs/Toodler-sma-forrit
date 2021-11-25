@@ -4,11 +4,13 @@ import { Image, View, Text, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import styles from './styles';
 
-const ImageThumbnail = ({ file, name, isSelected, onLongPress}) => {
+const ImageThumbnail = ({ file, name, isSelected, onLongPress, id}) => {
+    const { navigate } = useNavigation();
     return (
         <TouchableOpacity
             onLongPress={() => onLongPress(name)}
-            /* onPress={() => navigate('Preview', { fileName: name })}  */>
+            onPress={() => navigate('Board', { id })} >
+
             {
                 isSelected
                     ?

@@ -29,7 +29,7 @@ const Board = ({route}) => {
 
     {console.log("final board lists list",boardLists)}
     return(
-        <View>
+        <View style={styles.container}>
             <BoardLists 
                lists = {boardLists}
                /* selectedBoard={selectedBoard}

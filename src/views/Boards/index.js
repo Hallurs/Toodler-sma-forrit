@@ -120,7 +120,6 @@ const Boards = () => {
                     onAdd={() => setIsAddModalOpen(true)}
                     onRemove={() => deleteSelectedImages()} 
                     onEdit={() => editSelectedBoard()}/>
-            
             <ListsOfBoards 
                 images={images}
                 selectedImages={selectedImages}
@@ -140,7 +139,6 @@ const Boards = () => {
                 confirmChanges={(newboardname) => addWriteData(newboardname)}
                 selectFromCameraRoll={() => selectFromCameraRoll()}
                 />
-            
         </View>
     )
 };

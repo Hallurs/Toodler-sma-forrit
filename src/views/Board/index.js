@@ -9,8 +9,8 @@ const Board = ({route}) => {
     
     const { boardId } = route.params; 
 
-    const [selectedBoard, setSelectedBoard] = useState([]);
-    const [boardLists, setBoardLists] = useState([]);
+    const [selectedTasks, setSelectedTasks] = useState([]);
+    const [boardLists, setTaskLists] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -22,23 +22,39 @@ const Board = ({route}) => {
             })) */
             const newLists = [...data.lists/* ,...sommin */]
             const finalLists = newLists.filter(list => list.boardId === boardId);
-            setBoardLists(finalLists);
+            setTaskLists(finalLists);
                       
         })();
     }, []);
+
+    const onTaskLongPress = name => {
+        if (selectedTasks.indexOf(name) !== -1) {
+            // The image is already within the list
+            setSelectedTasks(selectedTasks.filter(task => task !== name));
+        } else {
+            // Add the new task and replace the old task
+            if (selectedTasks.length > 0) 
+            {
+                selectedTasks.pop();
+                setSelectedTasks([...selectedTasks, name]);
+            } else {
+                setSelectedTasks([...selectedTasks, name]);
+            }
+        }
+    };
 
     /* {console.log("final board lists list",boardLists)} */
     return(
         <View style={styles.container}>
             <Toolbar
-                    //hasSelectedImages={selectedImages.length > 0}
+                    hasSelectedImages={selectedTasks.length > 0}
                     onAdd={() => setIsAddModalOpen(true)}
-                    onRemove={() => deleteSelectedImages()} 
-                    onEdit={() => editSelectedBoard()}/>
+                    onRemove={() => deleteSelectedTask()} 
+                    onEdit={() => editSelectedTask()}/>
             <BoardLists 
                lists = {boardLists}
-               /* selectedBoard={selectedBoard}
-               onLongPress={name => onImageLongPress(name)} *//>
+               selectedTasks={selectedTasks}
+               onLongPress={name => onTaskLongPress(name)} />
         </View>
     )
 }

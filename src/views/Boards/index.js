@@ -83,7 +83,6 @@ const Boards = () => {
 
         const newImage = await fileService.addImage(image);
         setTempImage(`data:image/jpeg;base64,${newImage.file}`)
-        setImages([...images, newImage]);
         setLoadingImages(false);
     };
 
@@ -104,7 +103,6 @@ const Boards = () => {
     }
 
     const addWriteData = (newBoardName) => {
-        console.log(newBoardName);
         const newImage = {
             name: newBoardName,
             thumbnailPhoto: tempImage

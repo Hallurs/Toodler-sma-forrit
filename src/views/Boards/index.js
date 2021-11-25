@@ -9,7 +9,7 @@ import * as imageService from '../../services/imageService';
 
 import EditModal from '../../components/EditModal';
 
-const Boards = ({navigation: { navigate } }) => {
+const Boards = () => {
     
     const [images, setImages] = useState();
     const [selectedImages, setSelectedImages] = useState([]);
@@ -122,11 +122,6 @@ const Boards = ({navigation: { navigate } }) => {
                 selectFromCameraRoll={() => selectFromCameraRoll()} 
                 />
             
-            {/* <TouchableHighlight 
-                onPress={() => navigate('Lists')}
-                style={styles.button}>
-                <Text style={styles.buttonText}>On boards now</Text>
-            </TouchableHighlight> */}
         </View>
     )
 };

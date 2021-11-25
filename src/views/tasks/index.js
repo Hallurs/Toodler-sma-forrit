@@ -1,15 +1,16 @@
 import React from "react";
 import { View, Text, TouchableHighlight, Image } from 'react-native';
 import styles from './styles';
+import ListsOfTasks from "../../components/ListsOfTasks";
 
-const Tasks = ({navigation: { navigate } }) => (
-    <View style={styles.container}>
-        <TouchableHighlight
-            onPress={() => navigate('Task')} 
-            style={styles.button}>
-            <Text style={styles.buttonText}>On tasks now</Text>
-        </TouchableHighlight>
-    </View>
-);
+const Tasks = ({route}) => {
+    const { listId } = route.params;
+
+    return(
+        <View style={styles.container}>
+            <ListsOfTasks /> 
+        </View>
+    )
+};
 
 export default Tasks;

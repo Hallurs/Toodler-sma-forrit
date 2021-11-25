@@ -30,6 +30,11 @@ const Board = ({route}) => {
     {console.log("final board lists list",boardLists)}
     return(
         <View>
+            <Toolbar
+                    //hasSelectedImages={selectedImages.length > 0}
+                    onAdd={() => setIsAddModalOpen(true)}
+                    onRemove={() => deleteSelectedImages()} 
+                    onEdit={() => editSelectedBoard()}/>
             <BoardLists 
                lists = {boardLists}
                /* selectedBoard={selectedBoard}

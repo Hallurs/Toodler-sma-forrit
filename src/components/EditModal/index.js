@@ -10,11 +10,10 @@ const EditModal = ({
     takePhoto,
     selectFromCameraRoll,
     confirmChanges,
-    nameOfBoard
 }) => {
 
     const [inputs, setInputs] = useState({
-        newBoardName: nameOfBoard
+        newBoardName: ''
     });
 
     const inputHandler = (name, value) => {

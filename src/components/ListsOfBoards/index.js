@@ -1,5 +1,6 @@
 import { NavigationHelpersContext } from '@react-navigation/native';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, FlatList } from 'react-native';
 import ImageThumbnail from '../ImageThumbnail';
 import styles from './styles';
@@ -22,5 +23,18 @@ const ListsOfBoards = ({ images, selectedImages, onLongPress }) => (
             keyExtractor={image => image.name} />
     </View>
 );
+
+ListsOfBoards.propTypes = {
+    // A list of all Boards
+    images: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        thumbnailPhoto: PropTypes.string
+    })),
+    // all curently selected boards
+    selectedImages: PropTypes.arrayOf(PropTypes.string),
+    // when the Board is pressed for long duration
+    onLongPress: PropTypes.func.isRequired
+};
 
 export default ListsOfBoards;

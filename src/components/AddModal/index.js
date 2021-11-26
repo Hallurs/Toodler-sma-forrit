@@ -44,7 +44,11 @@ const AddModal = ({
                     <Entypo style={styles.icon} name="image" />
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={() => confirmChanges(inputs.newBoardName)}>
+                    onPress={() => {
+                        // Change and then empty out the input
+                        confirmChanges(inputs.newBoardName);
+                        inputHandler('newBoardName', '');
+                    }}>
                     <Entypo style={styles.icon} name="check" />
                 </TouchableOpacity>
             </View>

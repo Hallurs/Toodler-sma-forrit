@@ -7,7 +7,7 @@ const Toolbar = ({ hasSelectedImages, onAdd, onRemove, onEdit }) => (
         <TouchableHighlight
             style={styles.toolbarAction}
             onPress={onAdd}>
-            <Text style={styles.toolbarActionText}>Add image</Text>
+            <Text style={styles.toolbarActionText}>Add</Text>
         </TouchableHighlight>
         <TouchableHighlight
             style={styles.toolbarAction}

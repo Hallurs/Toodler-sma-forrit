@@ -83,7 +83,6 @@ const Boards = () => {
 
         const newImage = await fileService.addImage(image);
         setTempImage(`data:image/jpeg;base64,${newImage.file}`)
-        setImages([...images, newImage]);
         setLoadingImages(false);
     };
 
@@ -104,7 +103,6 @@ const Boards = () => {
     }
 
     const addWriteData = (newBoardName) => {
-        //console.log(newBoardName);
         const newImage = {
             name: newBoardName,
             thumbnailPhoto: tempImage
@@ -122,7 +120,6 @@ const Boards = () => {
                     onAdd={() => setIsAddModalOpen(true)}
                     onRemove={() => deleteSelectedImages()} 
                     onEdit={() => editSelectedBoard()}/>
-            
             <ListsOfBoards 
                 images={images}
                 selectedImages={selectedImages}
@@ -142,7 +139,6 @@ const Boards = () => {
                 confirmChanges={(newboardname) => addWriteData(newboardname)}
                 selectFromCameraRoll={() => selectFromCameraRoll()}
                 />
-            
         </View>
     )
 };

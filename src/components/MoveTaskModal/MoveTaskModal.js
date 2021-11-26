@@ -16,16 +16,17 @@ const MoveTaskModal = ({
             isOpen={isOpen}
             closeModal={closeModal}
         >
+            <Text style={styles.Title}>Lists to choose from!</Text>
             {allLists.map(list => (
                 <TouchableHighlight 
+                    key={list.id}
                     onPress={() => {
                         onSubmit(list.id);
                         closeModal();
                     }}
-                    style={[styles.button]}
                 >
-                <Text key={list.id}>{list.name}</Text>
-            </TouchableHighlight>
+                    <Text >{list.name}</Text>
+                </TouchableHighlight>
             ))}
         </Modal>
     );

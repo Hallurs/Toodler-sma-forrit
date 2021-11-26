@@ -23,6 +23,10 @@ export default StyleSheet.create({
     title: {
         textAlign: 'center',
         fontSize: 36,
+        backgroundColor: coolcolor,
+        borderColor: 'white',
+        borderRadius: 25,
+        borderWidth: 2,
     },
     description: {
         justifyContent: 'center',

@@ -33,7 +33,7 @@ const AddModal = ({
                 placeholder="Enter board name"
                 value={inputs.newBoardName}
                 onChangeText={text => inputHandler('newBoardName', text)}/>
-            <Text>Change the photo</Text>
+            <Text>Choose a photo</Text>
             <View style={styles.iconscontainer}> 
                 <TouchableOpacity
                     onPress={() => takePhoto()}>

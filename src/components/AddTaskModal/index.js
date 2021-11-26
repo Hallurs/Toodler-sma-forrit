@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { Entypo } from '@expo/vector-icons';
 import { TouchableOpacity, Text, View, TextInput } from 'react-native';
+import { SketchPicker  } from 'react-color';
 import Modal from '../Modal';
 import styles from './styles';
 
-const EditModal = ({
+const AddModal = ({
     isOpen,
     closeModal,
     takePhoto,
     selectFromCameraRoll,
     confirmChanges,
+    nameOfBoard
 }) => {
 
     const [inputs, setInputs] = useState({
-        newBoardName: ''
+        newTaskName: '',
+        taskDescription: ''
     });
 
     const inputHandler = (name, value) => {
@@ -27,32 +30,33 @@ const EditModal = ({
         <Modal
             isOpen={isOpen}
             closeModal={closeModal}>
-            <Text>Change Name Of Board </Text>
+            <Text>Add New Task!</Text>
+            <Text>Name Of Task</Text>
             <TextInput 
-                placeholder="Enter new boards name"
-                value={inputs.newBoardName}
-                onChangeText={text => inputHandler('newBoardName', text)} />
-            <Text>Change the photo</Text>
+                placeholder="Enter task name"
+                value={inputs.newTaskName}
+                onChangeText={text => inputHandler('newTaskName', text)}/>
+            <Text>Task Description</Text>
+            <TextInput 
+                placeholder="Enter task description"
+                value={inputs.taskDescription}
+                onChangeText={text => inputHandler('taskDescription', text)}/>
             <View style={styles.iconscontainer}> 
-                <TouchableOpacity
-                    onPress={() => takePhoto()}>
-                    <Entypo style={styles.icon} name="camera" />
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => selectFromCameraRoll()}>
-                    <Entypo style={styles.icon} name="image" />
-                </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => {
                         // Change and then empty out the input
-                        confirmChanges(inputs.newBoardName);
-                        inputHandler('newBoardName', '');
+                        confirmChanges(inputs);
+                        inputHandler('newTaskName', '');
+                        inputHandler('tasksDescription', '');
                     }}>
                     <Entypo style={styles.icon} name="check" />
                 </TouchableOpacity>
             </View>
+            
+            
+
         </Modal>
     );
 }
 
-export default EditModal;
+export default AddModal;

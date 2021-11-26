@@ -5,15 +5,14 @@ import BoardLists from '../../components/BoardLists';
 import data from "../../resources/data.json";
 import Toolbar from '../../components/Toolbar';
 import * as fileService from '../../services/fileService';
-import * as imageService from '../../services/imageService';
 
-import EditModal from '../../components/EditModal';
-import AddModal from '../../components/AddModal';
+import EditBoardModal from '../../components/EditBoardModal';
+import AddBoardModal from '../../components/AddBoardModal';
 
 const Board = ({route}) => {
     
     const { boardId } = route.params; 
-
+    const [allBoardLists, setAllBoardsLists] = useState();
     const [boardLists, setBoardsLists] = useState();
     const [selectedLists, setSelectedLists] = useState([]);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -21,13 +20,14 @@ const Board = ({route}) => {
 
     useEffect(() => {
         (async () => {
-            //console.log(images)
-            /* const sommin = images.map((image,index) => ({
+            //console.log(boardLists)
+            /* const sommin = boardLists.map((image,index) => ({
                 id: index+4,
                 name: image.name,
                 thumbnailPhoto: `data:image/jpeg;base64,${image.file}`
             })) */
             const newLists = [...data.lists/* ,...sommin */]
+            setAllBoardsLists(newLists);
             const finalLists = newLists.filter(list => list.boardId === boardId);
             setBoardsLists(finalLists);
                       
@@ -35,7 +35,7 @@ const Board = ({route}) => {
     }, []);
 
     const deleteSelectedList = async () => {
-        // Promise.all resolves the list of promises resulting in all images being deleted.
+        // Promise.all resolves the list of promises resulting in all boardLists being deleted.
         await Promise.all(selectedLists.map(list => fileService.remove_list(list)) /* Returns a list of promises */);
         
         // Correct the state variables
@@ -50,19 +50,29 @@ const Board = ({route}) => {
     }
 
     const overWriteData = (name ,newBoardName) => {
-        const imagefound = images.find(image => image.name === name[0]);
-        setTempImage();
+        const imagefound = boardLists.find(image => image.name === name[0]);
+        if (newBoardName !== "")
+        {
+            imagefound.name = newBoardName; 
+        }
         setSelectedLists([]);
         setIsEditModalOpen(false);
     }
 
     const addWriteData = (newBoardName) => {
+        // Dont need unique id but cool to keep this incase of future projects needing it
+        const largestId = allBoardLists.map(board => board.id).sort((a, b) => a - b)[allBoardLists.length - 1];
+        console.log(largestId)
+        console.log(boardId)
         const newImage = {
+            id: largestId + 1,
             name: newBoardName,
-            thumbnailPhoto: tempImage
+            color: "#ff00ff",
+            boardId: boardId
         };
-        images.push(newImage);
-        setTempImage();
+        allBoardLists.push(newImage);
+        fileService.add("lists",newImage)
+        boardLists.push(newImage);
         setSelectedLists([]);
         setIsAddModalOpen(false);
     }
@@ -95,7 +105,7 @@ const Board = ({route}) => {
                lists = {boardLists}
                selectedLists={selectedLists}
                onLongPress={name => onTaskLongPress(name)} />
-            <EditModal
+            <EditBoardModal
                 nameOfBoard={[...selectedLists]}
                 isOpen={isEditModalOpen}
                 closeModal={() => setIsEditModalOpen(false)}
@@ -103,7 +113,7 @@ const Board = ({route}) => {
                 confirmChanges={(newboardname) => overWriteData(selectedLists, newboardname)}
                 selectFromCameraRoll={() => selectFromCameraRoll()} 
                 />
-            <AddModal                 
+            <AddBoardModal                 
                 isOpen={isAddModalOpen}
                 closeModal={() => setIsAddModalOpen(false)}
                 takePhoto={() => takePhoto()}

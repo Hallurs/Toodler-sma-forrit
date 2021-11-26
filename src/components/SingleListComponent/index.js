@@ -10,10 +10,8 @@ const SingleListComponent = ({ name, color, isSelected, onLongPress, id}) => {
         <TouchableOpacity
             onLongPress={() => onLongPress(name)}
             onPress={() => navigate('Tasks', { listId: id })} >
-                <View style={[styles.task, {backgroundColor: color}]}>
-                    <View style={{ opacity: isSelected ? .1 : 1 }}>
-                        <Text style={styles.taskText}>{name}</Text>
-                    </View>
+                <View style={[styles.task, {backgroundColor: color}, { opacity: isSelected ? .3 : 1 }]}>
+                    <Text style={styles.taskText}>{name}</Text>
                 </View>
         </TouchableOpacity>
     );

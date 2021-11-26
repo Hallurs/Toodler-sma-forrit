@@ -6,8 +6,6 @@ export default StyleSheet.create({
         flex: 1,
         padding: 20,
         backgroundColor: periwinkle,
-        /* alignItems: 'center',
-        justifyContent: 'space-around' */
     },
     button: {
         marginTop: 30,
@@ -20,15 +18,19 @@ export default StyleSheet.create({
         backgroundColor: coolcolor
     },
     buttonText: {
-        color: 'white'
+        color: 'white',
     },
     title: {
         textAlign: 'center',
         fontSize: 36,
     },
     description: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '95%',
         textAlign: 'center',
         fontSize: 20,
-        
+        paddingTop: '45%',
+        paddingTop: '45%'
     }
 });

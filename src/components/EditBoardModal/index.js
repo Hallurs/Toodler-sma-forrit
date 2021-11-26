@@ -29,19 +29,10 @@ const EditModal = ({
             closeModal={closeModal}>
             <Text>Change Name Of Board </Text>
             <TextInput 
-                placeholder="Enter new boards name"
+                placeholder="Enter new board name"
                 value={inputs.newBoardName}
                 onChangeText={text => inputHandler('newBoardName', text)} />
-            <Text>Change the photo</Text>
             <View style={styles.iconscontainer}> 
-                <TouchableOpacity
-                    onPress={() => takePhoto()}>
-                    <Entypo style={styles.icon} name="camera" />
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => selectFromCameraRoll()}>
-                    <Entypo style={styles.icon} name="image" />
-                </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => {
                         // Change and then empty out the input

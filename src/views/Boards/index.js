@@ -21,7 +21,6 @@ const Boards = () => {
 
     useEffect(() => {
         (async () => {
-            const images = await fileService.getAllImages();
             //console.log(images)
             /* const sommin = images.map((image,index) => ({
                 id: index+4,
@@ -102,12 +101,15 @@ const Boards = () => {
         setIsEditModalOpen(false);
     }
 
-    const addWriteData = (newBoardName) => {
+    const addWriteData = async (newBoardName) => {
+        const largestId = images.map(boards => boards.id).sort((a, b) => a - b)[images.length - 1];
         const newImage = {
+            id: largestId + 1,
             name: newBoardName,
             thumbnailPhoto: tempImage
         };
         images.push(newImage);
+        fileService.add("boards",newImage) /* Returns a list of promises */;
         setTempImage();
         setSelectedImages([]);
         setIsAddModalOpen(false);
@@ -116,10 +118,10 @@ const Boards = () => {
     return(
         <View style={styles.container}>
             <Toolbar
-                    hasSelectedImages={selectedImages.length > 0}
-                    onAdd={() => setIsAddModalOpen(true)}
-                    onRemove={() => deleteSelectedBoards()} 
-                    onEdit={() => editSelectedBoard()}/>
+                hasSelectedImages={selectedImages.length > 0}
+                onAdd={() => setIsAddModalOpen(true)}
+                onRemove={() => deleteSelectedBoards()} 
+                onEdit={() => editSelectedBoard()}/>
             <ListsOfBoards 
                 images={images}
                 selectedImages={selectedImages}

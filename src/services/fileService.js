@@ -43,10 +43,21 @@ export const remove = name => {
     });
 }
 
+export const add = (name, obj) => {
+    console.log(name)
+    data[name].push(obj)
+}
+
 export const remove_list = name => {
     data.lists.map((elem,index,arr) => {
         if(elem.name === name) {arr.splice(index,1)}
     });
+}
+
+export const remove_task = name => {
+    data.tasks.map((elem,index,arr) => {
+        if(elem.name === name) {arr.splice(index,1)}
+    })
 }
 
 

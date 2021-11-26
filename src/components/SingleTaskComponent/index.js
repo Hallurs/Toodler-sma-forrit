@@ -9,12 +9,10 @@ const SingleTaskComponent = ({name, isSelected, onLongPress, id}) => {
     return (
         <TouchableOpacity
             onLongPress={() => onLongPress(name)}
-            onPress={() => navigate('Task', { taskId: id })} >
-            <View style={[styles.task]}>   
-                <View style={{ opacity: isSelected ? .5 : 1 }} >
+            onPress={() => navigate('Task', { taskId: id })} >   
+                <View style={[styles.task, {backgroundColor: '#AAAFFF'/* color */}, { opacity: isSelected ? .3 : 1 }]}>
                     <Text style={styles.taskText}>{name}</Text>
                 </View>
-            </View>
         </TouchableOpacity>
     );
 }

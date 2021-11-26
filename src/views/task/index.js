@@ -31,7 +31,7 @@ const Task = ({route}) => {
             {
                 isLoaded
                 ?
-                <View>
+                <View style={styles.container2}>
                     <Text style={styles.title}>
                         {tasksLists[0].name}
                     </Text>

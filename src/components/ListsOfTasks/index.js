@@ -3,7 +3,7 @@ import { View, FlatList } from 'react-native';
 import SingleTaskComponent from '../SingleTaskComponent';
 import styles from './styles.js';
 
-const ListsOfTasks = ({lists}) => (
+const ListsOfTasks = ({lists}, onLongPress) => (
     <View style={styles.listContainer}>
         <FlatList
             data = {lists}
@@ -12,7 +12,8 @@ const ListsOfTasks = ({lists}) => (
                     <SingleTaskComponent
                         name={item.name}
                         description={item.description}
-                        id={item.id} />
+                        id={item.id} 
+                        onLongPress = {onLongPress}/>
                 );
             }}
             keyExtractor={image => image.name} />

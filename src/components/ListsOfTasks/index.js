@@ -10,7 +10,8 @@ const ListsOfTasks = ({lists}) => (
                 return (
                     <SingleTaskComponent
                         name={item.name}
-                        description={item.description} />
+                        description={item.description}
+                        id={item.id} />
                 );
             }}
             keyExtractor={image => image.name} />

@@ -104,7 +104,7 @@ const Boards = () => {
     }
 
     const addWriteData = (newBoardName) => {
-        console.log(newBoardName);
+        //console.log(newBoardName);
         const newImage = {
             name: newBoardName,
             thumbnailPhoto: tempImage

@@ -36,11 +36,19 @@ export const addImage = async imageLocation => {
     };
 }
 
+//TODO rename
 export const remove = name => {
     data.boards.map((elem,index,arr) => {
         if(elem.name === name) {arr.splice(index,1)}
     });
 }
+
+export const remove_list = name => {
+    data.lists.map((elem,index,arr) => {
+        if(elem.name === name) {arr.splice(index,1)}
+    });
+}
+
 
 export const loadImage = async fileName => {
     return await onException(() => FileSystem.readAsStringAsync(`${imageDirectory}/${fileName}`, {

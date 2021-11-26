@@ -32,6 +32,11 @@ const Tasks = ({route}) => {
 
     return(
         <View style={styles.container}>
+            <Toolbar
+                    //hasSelectedImages={selectedTasks.length > 0}
+                    onAdd={() => setIsAddModalOpen(true)}
+                    onRemove={() => deleteSelectedTask()} 
+                    onEdit={() => editSelectedTask()}/>
             <ListsOfTasks 
             lists = {tasksLists}/> 
         </View>

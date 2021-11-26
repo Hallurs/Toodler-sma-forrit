@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableHighlight, Image } from 'react-native';
 import styles from './styles';
+import BoardLists from '../../components/BoardLists';
 import data from "../../resources/data.json";
 import Toolbar from '../../components/Toolbar';
-import BoardLists from '../../components/BoardLists';
+import * as fileService from '../../services/fileService';
+import * as imageService from '../../services/imageService';
+
+import EditModal from '../../components/EditModal';
+import AddModal from '../../components/AddModal';
 
 const Board = ({route}) => {
     
     const { boardId } = route.params; 
 
-    const [selectedTasks, setSelectedTasks] = useState([]);
-    const [boardLists, setTaskLists] = useState([]);
+    const [boardLists, setBoardsLists] = useState();
+    const [selectedLists, setSelectedLists] = useState([]);
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -22,23 +29,56 @@ const Board = ({route}) => {
             })) */
             const newLists = [...data.lists/* ,...sommin */]
             const finalLists = newLists.filter(list => list.boardId === boardId);
-            setTaskLists(finalLists);
+            setBoardsLists(finalLists);
                       
         })();
     }, []);
 
+    const deleteSelectedList = async () => {
+        // Promise.all resolves the list of promises resulting in all images being deleted.
+        await Promise.all(selectedLists.map(list => fileService.remove_list(list)) /* Returns a list of promises */);
+        
+        // Correct the state variables
+        setBoardsLists(boardLists.filter(boardList => selectedLists.indexOf(boardList.name) === -1));
+        
+        setSelectedLists([]);
+        setLoadingImages(false);
+    }
+
+    const editSelectedList = async () => {
+        setIsEditModalOpen(true);
+    }
+
+    const overWriteData = (name ,newBoardName) => {
+        const imagefound = images.find(image => image.name === name[0]);
+        setTempImage();
+        setSelectedLists([]);
+        setIsEditModalOpen(false);
+    }
+
+    const addWriteData = (newBoardName) => {
+        const newImage = {
+            name: newBoardName,
+            thumbnailPhoto: tempImage
+        };
+        images.push(newImage);
+        setTempImage();
+        setSelectedLists([]);
+        setIsAddModalOpen(false);
+    }
+
     const onTaskLongPress = name => {
-        if (selectedTasks.indexOf(name) !== -1) {
+        if (selectedLists.indexOf(name) !== -1) {
             // The image is already within the list
-            setSelectedTasks(selectedTasks.filter(task => task !== name));
+            setSelectedLists(selectedLists.filter(list => list !== name));
         } else {
-            // Add the new task and replace the old task
-            if (selectedTasks.length > 0) 
+            // Add the new list and replace the old list
+            if (selectedLists.length > 0) 
             {
-                selectedTasks.pop();
-                setSelectedTasks([...selectedTasks, name]);
+                selectedLists.pop();
+                setSelectedLists([...selectedLists, name]);
             } else {
-                setSelectedTasks([...selectedTasks, name]);
+                setSelectedLists([...selectedLists, name]);
             }
         }
     };
@@ -47,14 +87,29 @@ const Board = ({route}) => {
     return(
         <View style={styles.container}>
             <Toolbar
-                    hasSelectedImages={selectedTasks.length > 0}
+                    hasSelectedImages={selectedLists.length > 0}
                     onAdd={() => setIsAddModalOpen(true)}
-                    onRemove={() => deleteSelectedTask()} 
-                    onEdit={() => editSelectedTask()}/>
+                    onRemove={() => deleteSelectedList()} 
+                    onEdit={() => editSelectedList()}/>
             <BoardLists 
                lists = {boardLists}
-               selectedTasks={selectedTasks}
+               selectedLists={selectedLists}
                onLongPress={name => onTaskLongPress(name)} />
+            <EditModal
+                nameOfBoard={[...selectedLists]}
+                isOpen={isEditModalOpen}
+                closeModal={() => setIsEditModalOpen(false)}
+                takePhoto={() => takePhoto()}
+                confirmChanges={(newboardname) => overWriteData(selectedLists, newboardname)}
+                selectFromCameraRoll={() => selectFromCameraRoll()} 
+                />
+            <AddModal                 
+                isOpen={isAddModalOpen}
+                closeModal={() => setIsAddModalOpen(false)}
+                takePhoto={() => takePhoto()}
+                confirmChanges={(newboardname) => addWriteData(newboardname)}
+                selectFromCameraRoll={() => selectFromCameraRoll()}
+                />
         </View>
     )
 }

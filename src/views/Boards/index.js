@@ -52,15 +52,15 @@ const Boards = () => {
         }
     };
 
-    const deleteSelectedImages = async () => {
+    const deleteSelectedBoards = async () => {
         setLoadingImages(true);
 
         // Promise.all resolves the list of promises resulting in all images being deleted.
         await Promise.all(selectedImages.map(image => fileService.remove(image)) /* Returns a list of promises */);
 
         // Correct the state variables
-        setSelectedImages([]);
         setImages(images.filter(image => selectedImages.indexOf(image.name) === -1));
+        setSelectedImages([]);
         setLoadingImages(false);
     }
 
@@ -118,7 +118,7 @@ const Boards = () => {
             <Toolbar
                     hasSelectedImages={selectedImages.length > 0}
                     onAdd={() => setIsAddModalOpen(true)}
-                    onRemove={() => deleteSelectedImages()} 
+                    onRemove={() => deleteSelectedBoards()} 
                     onEdit={() => editSelectedBoard()}/>
             <ListsOfBoards 
                 images={images}

@@ -7,15 +7,15 @@ import styles from './styles';
 const SingleListComponent = ({ name, color, isSelected, onLongPress, id}) => {
     const { navigate } = useNavigation();
     return (
-        <View style={[styles.task, {backgroundColor: color}]}>
-            <TouchableOpacity
-                onLongPress={() => onLongPress(name)}
-                onPress={() => navigate('Tasks', { listId: id })} >
-                <View style={{ opacity: isSelected ? .5 : 1 }}>
-                    <Text style={styles.taskText}>{name}</Text>
+        <TouchableOpacity
+            onLongPress={() => onLongPress(name)}
+            onPress={() => navigate('Tasks', { listId: id })} >
+                <View style={[styles.task, {backgroundColor: color}]}>
+                    <View style={{ opacity: isSelected ? .1 : 1 }}>
+                        <Text style={styles.taskText}>{name}</Text>
+                    </View>
                 </View>
-            </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
     );
 }
 

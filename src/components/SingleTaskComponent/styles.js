@@ -1,10 +1,15 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-    image: {
+    task: {        
         width: 200,
         height: 100,
-        margin: 10
+        margin: 10,
+        borderRadius: 25,
+    },
+    taskText: {
+        textAlign: 'center',
+        fontSize: 36,
     },
     checkmark: {
         position: 'absolute',

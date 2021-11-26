@@ -3,7 +3,7 @@ import { View, FlatList } from 'react-native';
 import styles from './styles';
 import SingleListComponent from '../SingleListComponent';
 
-const BoardLists = ({lists, selectedTasks, onLongPress}) => {
+const BoardLists = ({lists, selectedLists, onLongPress}) => {
     return(
         <View style={styles.listContainer}>
             <FlatList
@@ -11,7 +11,7 @@ const BoardLists = ({lists, selectedTasks, onLongPress}) => {
             renderItem={({ item }) => {
                 return (
                     <SingleListComponent
-                        isSelected={selectedTasks.indexOf(item.name) !== -1}
+                        isSelected={selectedLists.indexOf(item.name) !== -1}
                         onLongPress={onLongPress}
                         name={item.name}
                         color={item.color} 

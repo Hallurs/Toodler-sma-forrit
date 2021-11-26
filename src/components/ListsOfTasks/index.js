@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
 import SingleTaskComponent from '../SingleTaskComponent';
+import styles from './styles.js';
 
 const ListsOfTasks = ({lists}) => (
-    <View>
+    <View style={styles.listContainer}>
         <FlatList
             data = {lists}
             renderItem={({ item }) => {

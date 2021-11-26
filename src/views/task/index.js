@@ -5,15 +5,14 @@ import data from "../../resources/data.json";
 import Toolbar from '../../components/Toolbar';
 
 const Task = ({route}) => {
-    //console.log('Hæ')
     const { taskId } = route.params;
-    //console.log(taskId)
     
     const [selectedBoard, setSelectedBoard] = useState([]);
     const [tasksLists, setTasksLists] = useState([]);
+    const [isLoaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        (async () => {
+        (() => {
             //console.log(images)
             /* const sommin = images.map((image,index) => ({
                 id: index+4,
@@ -22,19 +21,28 @@ const Task = ({route}) => {
             })) */
             const newLists = [...data.tasks/* ,...sommin */]
             const finalLists = newLists.filter(task => task.id === taskId);
-            //console.log(newLists)
-            setTasksLists(finalLists);
-                      
+            setTasksLists(finalLists);   
+            setLoaded(true);  
         })();
     }, []);
-    console.log(tasksLists[0].description)
 
     return(
         <View style={styles.container}>
-            <Text>
-            {tasksLists[0].description}
-            {tasksLists[0].isFinished}
-            </Text>
+            {
+                isLoaded
+                ?
+                <View>
+                    <Text style={styles.title}>
+                        {tasksLists[0].name}
+                    </Text>
+
+                    <Text style={styles.description}>
+                        {tasksLists[0].description} 
+                    </Text>
+                </View>
+                :
+                <></>
+            }
         </View>
     )
 };

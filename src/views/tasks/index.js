@@ -8,21 +8,26 @@ import * as fileService from '../../services/fileService';
 
 import EditTaskModal from '../../components/EditTaskModal';
 import AddTaskModal from '../../components/AddTaskModal';
+import MoveTaskModal from '../../components/MoveTaskModal/MoveTaskModal';
 
 const Tasks = ({route}) => {
     const { listId } = route.params;
+    const [allLists, setAllLists] = useState([]);
     const [allTasksLists, setAllTasksLists] = useState([]);
     const [tasksLists, setTasksLists] = useState([]);
     const [selectedTasks, setSelectedTasks] = useState([]);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isMoveTaskModalOpen, setIsMoveTaskModalOpen] = useState(false);
     
     useEffect(() => {
         (async () => {
-            const newLists = [...data.tasks/* ,...sommin */]
-            setAllTasksLists(newLists);
-            const finalLists = newLists.filter(tasks => tasks.listId === listId);
-            setTasksLists(finalLists);
+            const allTasks = [...data.tasks/* ,...sommin */]
+            const allLists = [...data.lists/* ,...sommin */]
+            setAllTasksLists(allTasks);
+            setAllLists(allLists);
+            const finalTasks = allTasks.filter(tasks => tasks.listId === listId);
+            setTasksLists(finalTasks);
                       
         })();
     }, []);
@@ -72,6 +77,14 @@ const Tasks = ({route}) => {
         setIsEditModalOpen(false);
     }
 
+    const moveTask = (listId) => {
+        const taskFound = tasksLists.find(task => task.name === selectedTasks[0]);
+        
+        taskFound.listId = listId; 
+        setTasksLists(tasksLists.filter(tasksLists => selectedTasks.indexOf(tasksLists.name) === -1));
+        setSelectedTasks([]);
+    }
+
     const checkboxPressed = id =>{
         const taskFound = tasksLists.find(task => task.id === id);
         if (taskFound.isFinished)
@@ -104,12 +117,29 @@ const Tasks = ({route}) => {
                 hasSelectedImages={selectedTasks.length > 0}
                 onAdd={() => setIsAddModalOpen(true)}
                 onRemove={() => deleteSelectedTask()} 
-                onEdit={() => editSelectedTask()}/>
+                onEdit={() => editSelectedTask()}
+                />
             <ListsOfTasks 
                 lists = {tasksLists}
                 selectedTasks={selectedTasks}
                 onLongPress={name => onTaskLongPress(name)} 
-                onValueChange={id => checkboxPressed(id)}/>
+                onValueChange={id => checkboxPressed(id)}
+                />
+            <TouchableHighlight 
+                onPress={() => setIsMoveTaskModalOpen(true)}
+                style={[styles.button, { opacity: selectedTasks.length === 0 ? .3 : 1 }]}
+                disabled={selectedTasks.length === 0}
+            >
+                <Text style={styles.buttonText}>Move</Text>
+            </TouchableHighlight>
+
+            <MoveTaskModal
+                isOpen={isMoveTaskModalOpen}
+                closeModal={() => setIsMoveTaskModalOpen(false)}
+                allLists={allLists}
+                onSubmit={moveTask}
+            />
+
             <EditTaskModal
                 nameOfBoard={[...selectedTasks]}
                 isOpen={isEditModalOpen}

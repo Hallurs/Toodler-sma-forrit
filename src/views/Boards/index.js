@@ -21,12 +21,6 @@ const Boards = () => {
 
     useEffect(() => {
         (async () => {
-            //console.log(images)
-            /* const sommin = images.map((image,index) => ({
-                id: index+4,
-                name: image.name,
-                thumbnailPhoto: `data:image/jpeg;base64,${image.file}`
-            })) */
             const newimages = [...data.boards/* ,...sommin */]
             setImages(newimages);
             setLoadingImages(false);
@@ -87,7 +81,6 @@ const Boards = () => {
 
     const overWriteData = (name ,newBoardName) => {
         const imagefound = images.find(image => image.name === name[0]);
-        console.log(imagefound);
         if (tempImage !== undefined)
         {
             imagefound.thumbnailPhoto = tempImage;

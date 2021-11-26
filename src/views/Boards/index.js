@@ -12,9 +12,8 @@ import AddModal from '../../components/AddModal';
 
 const Boards = () => {
     
-    const [images, setImages] = useState();
-    const [selectedImages, setSelectedImages] = useState([]);
-    const [loadingImages, setLoadingImages] = useState(true);
+    const [boards, setBoards] = useState();
+    const [selectedBoards, setSelectedBoards] = useState([]);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [tempImage, setTempImage] = useState();
@@ -22,39 +21,36 @@ const Boards = () => {
     useEffect(() => {
         (async () => {
             const newimages = [...data.boards/* ,...sommin */]
-            setImages(newimages);
-            setLoadingImages(false);
+            setBoards(newimages);
         })();
     }, []);
 
     const onImageLongPress = name => {
-        if (selectedImages.indexOf(name) !== -1) {
+        if (selectedBoards.indexOf(name) !== -1) {
             // The image is already within the list
-            setSelectedImages(selectedImages.filter(image => image !== name));
+            setSelectedBoards(selectedBoards.filter(image => image !== name));
         } else {
             // Add the new image and replace the old image
-            if (selectedImages.length > 0) 
+            if (selectedBoards.length > 0) 
             {
-                selectedImages.pop();
-                setSelectedImages([...selectedImages, name]);
+                selectedBoards.pop();
+                setSelectedBoards([...selectedBoards, name]);
                 setTempImage();
             } else {
-                setSelectedImages([...selectedImages, name]);
+                setSelectedBoards([...selectedBoards, name]);
                 setTempImage();
             }
         }
     };
 
     const deleteSelectedBoards = async () => {
-        setLoadingImages(true);
 
         // Promise.all resolves the list of promises resulting in all images being deleted.
-        await Promise.all(selectedImages.map(image => fileService.remove(image)) /* Returns a list of promises */);
+        await Promise.all(selectedBoards.map(image => fileService.remove(image)) /* Returns a list of promises */);
 
         // Correct the state variables
-        setImages(images.filter(image => selectedImages.indexOf(image.name) === -1));
-        setSelectedImages([]);
-        setLoadingImages(false);
+        setBoards(boards.filter(image => selectedBoards.indexOf(image.name) === -1));
+        setSelectedBoards([]);
     }
 
     const editSelectedBoard = async () => {
@@ -72,15 +68,12 @@ const Boards = () => {
     }
 
     const addImage = async image => {
-        setLoadingImages(true);
-
         const newImage = await fileService.addImage(image);
         setTempImage(`data:image/jpeg;base64,${newImage.file}`)
-        setLoadingImages(false);
     };
 
     const overWriteData = (name ,newBoardName) => {
-        const imagefound = images.find(image => image.name === name[0]);
+        const imagefound = boards.find(image => image.name === name[0]);
         if (tempImage !== undefined)
         {
             imagefound.thumbnailPhoto = tempImage;
@@ -90,41 +83,41 @@ const Boards = () => {
             imagefound.name = newBoardName; 
         }
         setTempImage();
-        setSelectedImages([]);
+        setSelectedBoards([]);
         setIsEditModalOpen(false);
     }
 
     const addWriteData = async (newBoardName) => {
-        const largestId = images.map(boards => boards.id).sort((a, b) => a - b)[images.length - 1];
+        const largestId = boards.map(boards => boards.id).sort((a, b) => a - b)[boards.length - 1];
         const newImage = {
             id: largestId + 1,
             name: newBoardName,
             thumbnailPhoto: tempImage
         };
-        images.push(newImage);
+        boards.push(newImage);
         fileService.add("boards",newImage) /* Returns a list of promises */;
         setTempImage();
-        setSelectedImages([]);
+        setSelectedBoards([]);
         setIsAddModalOpen(false);
     }
 
     return(
         <View style={styles.container}>
             <Toolbar
-                hasSelectedImages={selectedImages.length > 0}
+                hasSelectedImages={selectedBoards.length > 0}
                 onAdd={() => setIsAddModalOpen(true)}
                 onRemove={() => deleteSelectedBoards()} 
                 onEdit={() => editSelectedBoard()}/>
             <ListsOfBoards 
-                images={images}
-                selectedImages={selectedImages}
+                images={boards}
+                selectedImages={selectedBoards}
                 onLongPress={name => onImageLongPress(name)}/>
             <EditModal
-                nameOfBoard={[...selectedImages]}
+                nameOfBoard={[...selectedBoards]}
                 isOpen={isEditModalOpen}
                 closeModal={() => setIsEditModalOpen(false)}
                 takePhoto={() => takePhoto()}
-                confirmChanges={(newboardname) => overWriteData(selectedImages, newboardname)}
+                confirmChanges={(newboardname) => overWriteData(selectedBoards, newboardname)}
                 selectFromCameraRoll={() => selectFromCameraRoll()} 
                 />
             <AddModal                 

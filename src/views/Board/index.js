@@ -36,7 +36,6 @@ const Board = ({route}) => {
         setBoardsLists(boardLists.filter(boardList => selectedLists.indexOf(boardList.name) === -1));
         
         setSelectedLists([]);
-        setLoadingImages(false);
     }
 
     const editSelectedList = async () => {
@@ -53,13 +52,13 @@ const Board = ({route}) => {
         setIsEditModalOpen(false);
     }
 
-    const addWriteData = (newBoardName) => {
+    const addWriteData = (newBoardName, color) => {
         // Dont need unique id but cool to keep this incase of future projects needing it
         const largestId = allBoardLists.map(board => board.id).sort((a, b) => a - b)[allBoardLists.length - 1];
         const newImage = {
             id: largestId + 1,
             name: newBoardName,
-            color: "#ff00ff",
+            color: color,
             boardId: boardId
         };
         allBoardLists.push(newImage);
@@ -108,9 +107,9 @@ const Board = ({route}) => {
                 isOpen={isAddModalOpen}
                 closeModal={() => setIsAddModalOpen(false)}
                 takePhoto={() => takePhoto()}
-                confirmChanges={(newboardname) => addWriteData(newboardname)}
+                confirmChanges={(newboardname, color) => addWriteData(newboardname, color)}
                 selectFromCameraRoll={() => selectFromCameraRoll()}
-                />
+            />
         </View>
     )
 }

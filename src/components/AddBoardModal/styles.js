@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { periwinkle, coolcolor } from "../../styles/colors";
 
 export default StyleSheet.create({
     icon: {
@@ -10,5 +11,15 @@ export default StyleSheet.create({
     },
     iconscontainer: {
         flexDirection: 'row',
-    }
+    },
+    button: {
+        marginTop: 30,
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+        borderColor: 'white',
+        borderWidth: 2,
+        backgroundColor: coolcolor
+    },
 });

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Entypo } from '@expo/vector-icons';
 import { TouchableOpacity, Text, View, TextInput } from 'react-native';
-import { SketchPicker  } from 'react-color';
 import Modal from '../Modal';
 import styles from './styles';
 

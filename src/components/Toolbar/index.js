@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TouchableHighlight, Text } from 'react-native';
 import styles from './styles';
+import PropTypes from 'prop-types';
 
 const Toolbar = ({ hasSelectedImages, onAdd, onRemove, onEdit }) => (
     <View styleName="horizontal" style={styles.toolbar}>
@@ -23,5 +24,16 @@ const Toolbar = ({ hasSelectedImages, onAdd, onRemove, onEdit }) => (
         </TouchableHighlight>
     </View>
 );
+
+Toolbar.propTypes = {
+    // Determines if there are selected boards, lists or tasks or not
+    hasSelectedImages: PropTypes.bool.isRequired,
+    // Adding function
+    onAdd: PropTypes.func.isRequired,
+    // Removing function
+    onRemove: PropTypes.func.isRequired,
+    // Edit function
+    onEdit: PropTypes.func.isRequired
+};
 
 export default Toolbar;

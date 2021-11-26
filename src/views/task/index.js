@@ -13,12 +13,6 @@ const Task = ({route}) => {
 
     useEffect(() => {
         (() => {
-            //console.log(images)
-            /* const sommin = images.map((image,index) => ({
-                id: index+4,
-                name: image.name,
-                thumbnailPhoto: `data:image/jpeg;base64,${image.file}`
-            })) */
             const newLists = [...data.tasks/* ,...sommin */]
             const finalLists = newLists.filter(task => task.id === taskId);
             setTasksLists(finalLists);   

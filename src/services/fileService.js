@@ -44,7 +44,6 @@ export const remove = name => {
 }
 
 export const add = (name, obj) => {
-    console.log(name)
     data[name].push(obj)
 }
 

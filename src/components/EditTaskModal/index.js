@@ -13,7 +13,8 @@ const EditModal = ({
 }) => {
 
     const [inputs, setInputs] = useState({
-        newBoardName: ''
+        newTaskName: '',
+        taskDescription: ''
     });
 
     const inputHandler = (name, value) => {
@@ -27,17 +28,28 @@ const EditModal = ({
         <Modal
             isOpen={isOpen}
             closeModal={closeModal}>
-            <Text>Change Name Of Board </Text>
+            <Text>Change Name Of Task </Text>
             <TextInput 
-                placeholder="Enter new board name"
-                value={inputs.newBoardName}
-                onChangeText={text => inputHandler('newBoardName', text)} />
+                placeholder="Enter new task name"
+                value={inputs.newTaskName}
+                onChangeText={text => inputHandler('newTaskName', text)} />
+            <Text>Task Description</Text>
+            <TextInput 
+                placeholder="Enter task description"
+                value={inputs.taskDescription}
+                onChangeText={text => inputHandler('taskDescription', text)}/>
             <View style={styles.iconscontainer}> 
                 <TouchableOpacity
                     onPress={() => {
                         // Change and then empty out the input
-                        confirmChanges(inputs.newBoardName);
-                        inputHandler('newBoardName', '');
+                        if (inputs.newTaskName.length > 0)
+                        {
+                            confirmChanges(inputs);
+                            inputHandler('newTaskName', '');
+                            inputHandler('tasksDescription', '');
+                        } else {
+                            // Error
+                        }
                     }}>
                     <Entypo style={styles.icon} name="check" />
                 </TouchableOpacity>

@@ -20,12 +20,6 @@ const Board = ({route}) => {
 
     useEffect(() => {
         (async () => {
-            //console.log(boardLists)
-            /* const sommin = boardLists.map((image,index) => ({
-                id: index+4,
-                name: image.name,
-                thumbnailPhoto: `data:image/jpeg;base64,${image.file}`
-            })) */
             const newLists = [...data.lists/* ,...sommin */]
             setAllBoardsLists(newLists);
             const finalLists = newLists.filter(list => list.boardId === boardId);
@@ -62,8 +56,6 @@ const Board = ({route}) => {
     const addWriteData = (newBoardName) => {
         // Dont need unique id but cool to keep this incase of future projects needing it
         const largestId = allBoardLists.map(board => board.id).sort((a, b) => a - b)[allBoardLists.length - 1];
-        console.log(largestId)
-        console.log(boardId)
         const newImage = {
             id: largestId + 1,
             name: newBoardName,
@@ -93,7 +85,6 @@ const Board = ({route}) => {
         }
     };
 
-    /* {console.log("final board lists list",boardLists)} */
     return(
         <View style={styles.container}>
             <Toolbar
